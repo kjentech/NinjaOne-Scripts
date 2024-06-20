@@ -139,11 +139,8 @@ $wingetList = (& $winget list | winget_outclean) -replace "mssto…","msstore"
 $wingetObjects = $wingetList | ConvertFrom-FixedColumnTable | Sort-Object -Property @{Expression = "Available"; Descending = $true},@{Expression = "Source"; Descending = $true},@{Expression = "Id"; Descending = $false}
 
 $objectWithColor = $wingetObjects | foreach {
-  if ($_.Available) {
-    Add-Member -InputObject $_ -MemberType NoteProperty -Name RowColour -Value "danger"
-  } else {
-    Add-Member -InputObject $_ -MemberType NoteProperty -Name RowColour -Value "other"
-  }
+  if ($_.Source -and -not $_.Available) { Add-Member -InputObject $_ -MemberType NoteProperty -Name RowColour -Value "other" }
+  if ($_.Available) { Add-Member -InputObject $_ -MemberType NoteProperty -Name RowColour -Value "danger" } 
   $_
 }
 
