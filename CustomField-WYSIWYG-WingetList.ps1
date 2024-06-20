@@ -135,9 +135,8 @@ else {
   $winget = Get-Command winget.exe -ErrorAction SilentlyContinue
 }
 
-# $wingetUpgrade = & $winget upgrade | winget_outclean
 $wingetList = (& $winget list | winget_outclean) -replace "mssto…","msstore"
-$wingetObjects = $wingetList | ConvertFrom-FixedColumnTable | sort Id
+$wingetObjects = $wingetList | ConvertFrom-FixedColumnTable | Sort-Object -Property @{Expression = "Available"; Descending = $true},@{Expression = "Source"; Descending = $true},@{Expression = "Id"; Descending = $false}
 
 $objectWithColor = $wingetObjects | foreach {
   if ($_.Available) {
