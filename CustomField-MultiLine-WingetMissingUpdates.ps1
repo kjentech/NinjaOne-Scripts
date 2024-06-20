@@ -96,9 +96,8 @@ else {
 }
 
 $wingetUpgrade = & $winget upgrade | winget_outclean
-# $wingetList = (& $winget list | winget_outclean) -replace "mssto…","msstore"
 $wingetObjects = $wingetUpgrade | ConvertFrom-FixedColumnTable | sort Id
 
-$WingetListOutput = $wingetObjects.Id
+$WingetUpgradeOutput = $wingetObjects.Id
 
-Ninja-Property-Set wingetList $WingetListOutput
+Ninja-Property-Set wingetMissingUpdates $WingetUpgradeOutput
