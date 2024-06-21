@@ -90,8 +90,7 @@ function winget_outclean () {
 
 if ($env:USERNAME -match "$env:COMPUTERNAME|SYSTEM") {
   $winget = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe\winget.exe" | select -ExpandProperty Path -Last 1
-}
-else {
+} else {
   $winget = Get-Command winget.exe -ErrorAction SilentlyContinue
 }
 
