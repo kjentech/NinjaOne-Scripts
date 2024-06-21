@@ -88,7 +88,7 @@ function winget_outclean () {
 
 [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new() 
 
-if ($env:USERNAME -match "$env:COMPUTERNAME") {
+if ($env:USERNAME -match "$env:COMPUTERNAME|SYSTEM") {
   $winget = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe\winget.exe" | select -ExpandProperty Path -Last 1
 }
 else {
