@@ -1,3 +1,5 @@
+$CustomFieldName = "localGroupRdpUsers"
+
 $Domain = (Get-CimInstance Win32_ComputerSystem).Domain
 $DomainNetBIOS = ($Domain -split "\.")[0]
 $ExcludeMembers = "$Domain\Domain Admins","$DomainNetBIOS\Domain Admins"
@@ -7,7 +9,7 @@ $LocalGroupOutput = $LocalGroup.Name | Out-String
 $LocalGroupOutput
 
 if ([string]::IsNullOrEmpty($LocalGroupOutput)) {
-  Ninja-Property-Clear localGroupRdpUsers
+  Ninja-Property-Clear $CustomFieldName
 } else {
-  Ninja-Property-Set localGroupRdpUsers $LocalGroupOutput
+  Ninja-Property-Set $CustomFieldName $LocalGroupOutput
 }
