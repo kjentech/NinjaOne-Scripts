@@ -6,4 +6,8 @@ $LocalGroup = Get-LocalGroupMember -SID S-1-5-32-544 | where Name -notin $Exclud
 $LocalGroupOutput = $LocalGroup.Name | Out-String
 $LocalGroupOutput
 
-Ninja-Property-Set localGroupAdministrators $LocalGroupOutput
+if ([string]::IsNullOrEmpty($LocalGroupOutput)) {
+  Ninja-Property-Clear localGroupAdministrators
+} else {
+  Ninja-Property-Set localGroupAdministrators $LocalGroupOutput
+}
