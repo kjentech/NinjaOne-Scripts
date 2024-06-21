@@ -1,3 +1,5 @@
+$CustomFieldName = "localGroupAdministrators"
+
 $Domain = (Get-CimInstance Win32_ComputerSystem).Domain
 $DomainNetBIOS = ($Domain -split "\.")[0]
 $ExcludeMembers = "$Domain\Domain Admins","$DomainNetBIOS\Domain Admins","$env:computername\Administrator"
@@ -7,7 +9,7 @@ $LocalGroupOutput = $LocalGroup.Name | Out-String
 $LocalGroupOutput
 
 if ([string]::IsNullOrEmpty($LocalGroupOutput)) {
-  Ninja-Property-Clear localGroupAdministrators
+  Ninja-Property-Clear $CustomFieldName
 } else {
-  Ninja-Property-Set localGroupAdministrators $LocalGroupOutput
+  Ninja-Property-Set $CustomFieldName $LocalGroupOutput
 }
