@@ -36,7 +36,7 @@ function ConvertTo-ObjectToHtmlTable {
 
 #########################
 
-$LocalUsers = Get-LocalUser | Where {$_.Enabled -eq $true -and $_.SID -ne "S-1-5-21-1677959656-505996033-2382117720-500"}
+$LocalUsers = Get-LocalUser | Where {$_.Enabled -eq $true -and $_.SID -notmatch "-500$"}
 $PrivilegedGroups = "S-1-5-32-555","S-1-5-32-544"
 
 $UsersAndGroups = foreach ($User in $LocalUsers) {
