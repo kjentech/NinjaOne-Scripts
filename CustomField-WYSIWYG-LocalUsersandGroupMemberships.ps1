@@ -73,6 +73,7 @@ $objectWithColor = $UsersAndGroups | foreach {
   $_
 }
 
-$LocalUsersOutput = ConvertTo-ObjectToHtmlTable -Objects $objectWithColor
-
-Ninja-Property-Set localUsers $LocalUsersOutput
+if ($objectWithColor) {
+    $LocalUsersOutput = ConvertTo-ObjectToHtmlTable -Objects $objectWithColor
+    Ninja-Property-Set localUsers $LocalUsersOutput
+} else {Ninja-Property-Clear localUsers}
