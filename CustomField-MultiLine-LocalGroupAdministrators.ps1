@@ -3,6 +3,6 @@ $DomainNetBIOS = ($Domain -split "\.")[0]
 $ExcludeMembers = "$Domain\Domain Admins","$DomainNetBIOS\Domain Admins","$env:computername\Administrator"
 $LocalGroup = Get-LocalGroupMember -SID S-1-5-32-544 | where Name -notin $ExcludeMembers
 
-$LocalGroupOutput = $LocalGroupAdministrators.Name | Out-String
+$LocalGroupOutput = $LocalGroup.Name | Out-String
 
 Ninja-Property-Set localGroupAdministrators $LocalGroupOutput
